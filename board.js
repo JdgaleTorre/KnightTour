@@ -30,7 +30,6 @@ Board.prototype.print = function () {
       }
       this.board[i][j] = new Square(i, j, this.resolution, color, this.context);
       this.board[i][j].draw();
-      // this.drawKnight(i, j, color);
     }
   }
 };
@@ -39,19 +38,16 @@ Board.prototype.addEvents = function () {
   var _this = this;
 
   this.canvas.addEventListener("mousedown", async function (evt) {
-    // console.log(evt);
     _this.cleanBoard();
 
-    let x = Math.floor(evt.x / _this.resolution);
-    let y = Math.floor(evt.y / _this.resolution);
+    let x = Math.floor(evt.offsetX / _this.resolution);
+    let y = Math.floor(evt.offsetY / _this.resolution);
     _this.board[x][y].setValueKnight(true);
-    let knight = new Knight(x, y, _this.boardSize, 1);
 
     let board = initializeBoard(8);
 
     let result = visitNextPosition(x, y, board).reverse();
 
-    console.log(result);
     let contador = 1;
     let lastX = -1;
     let lastY = -1;
@@ -78,28 +74,6 @@ function sleep(ms) {
 Board.prototype.cleanBoard = function () {
   this.board.map((row) => row.map((column) => column.setValueKnight(false)));
 };
-
-// function visitedAllBoard(board) {
-//   let visited;
-
-//   for(let i=0; i< 8; i++) {
-//     for (let j = 0; j< 8; j++) {
-//       if(board[i][j].visited === false) {
-//         visited = false;
-//       }
-//     }
-//   }
-
-//   // board.map(row => {
-//   //   row.map(column => {
-//   //     if(column.visited === false) {
-//   //       visited = false;
-//   //     }
-//   //   })
-//   // });
-
-//   return visited;
-// }
 
 function copyBoard(board) {
   return board.map((column) => column.slice());

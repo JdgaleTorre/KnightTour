@@ -4,8 +4,6 @@ function Square(x, y, resolution, color, context) {
   this.resolution = resolution;
   this.color = color;
   this.context = context;
-  this.stepNumber = 0;
-  this.visited = false;
 }
 
 Square.prototype.draw = function () {
@@ -86,7 +84,10 @@ Square.prototype.drawNumber = function (number) {
   } else {
     this.context.fillStyle = "#FFF";
   }
-  let x = (this.x * this.resolution) + (this.resolution/2);
-  let y = (this.y * this.resolution) + (this.resolution/2);
-  this.context.fillText(number, x,y);
+  let xAdjustement = number > 9 ? 20 : 10;
+  let yAdjustement = 10;
+
+  let x = this.x * this.resolution + this.resolution / 2 - xAdjustement;
+  let y = this.y * this.resolution + this.resolution / 2 + yAdjustement;
+  this.context.fillText(number, x, y);
 };

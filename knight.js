@@ -1,10 +1,3 @@
-function Knight(row, column, boardSize, step) {
-  this.row = row;
-  this.column = column;
-  this.boardSize = boardSize;
-  this.step = step;
-}
-
 function visitNextPosition(x, y, board) {
   const copiedBoard = copyBoard(board);
   copiedBoard[x][y] = true;
